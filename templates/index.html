@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<style>
+div {
+    text-align: center;
+    width: 100%;
+
+}
+textarea {
+    width : 80%
+}
+button {
+    text-align: center;
+    width:10%;
+}
+input {
+    width:70%
+}
+</style>
+<body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var socket = io.connect("http://192.168.250.63:2000")
+
+        socket.on("message", function(data) {
+            txtArea = document.getElementById("chatbox");
+            txtArea.value += data + '\r\n';
+        });
+
+        $(sendBtn).on("click", function() {
+            socket.send($("#message").val() );
+            txtArea = document.getElementById("chatbox");
+            txtArea.value += '\r\n' + ">> " + $("#message").val() + '\r\n' + '\r\n';
+            $("#message").val('');
+        });
+    });
+
+</script>
+
+<div>
+    <label for="chatbox"></label><textarea id="chatbox" rows="40" cols="50" wrap="hard">
+
+</textarea>
+
+</div>
+<div>
+    <input type="text" id="message" placeholder="Ask The Magic Pixie a Question" minlength="1" size="45">
+    <button id="sendBtn" >Ask</button>
+</div>
+</body>
+</html>
