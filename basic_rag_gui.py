@@ -1,3 +1,5 @@
+# Created by Said Ikki
+
 import documents
 from langchain_community.llms import Ollama
 from langchain_community.document_loaders import WebBaseLoader , TextLoader, PyPDFLoader , DirectoryLoader, UnstructuredFileLoader
